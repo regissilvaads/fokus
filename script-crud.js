@@ -5,6 +5,10 @@ const ulTask = document.querySelector('.app__section-task-list');
 
 const taskList = JSON.parse(localStorage.getItem('taskList')) || [];
 
+function updateTask() {
+  localStorage.setItem('taskList', JSON.stringify(taskList));
+}
+
 btnAddTask.addEventListener('click', () => {
   formAddTask.classList.toggle('hidden');
 });
@@ -28,6 +32,14 @@ function newTaskElement(task) {
 
   const button = document.createElement('button');
   button.classList.add('app_button-edit');
+
+  button.onclick = () => {
+    const newDescriptionTask = prompt('Qual é o novo nome da tarefa:');
+    paragraph.textContent = newDescriptionTask;
+    task.description = newDescriptionTask;
+    updateTask();
+  };
+
   const imageButton = document.createElement('img');
 
   imageButton.setAttribute('src', '/imagens/edit.png');
@@ -47,7 +59,7 @@ formAddTask.addEventListener('submit', (evento) => {
   taskList.push(task);
   const taskElement = newTaskElement(task);
   ulTask.append(taskElement);
-  localStorage.setItem('taskList', JSON.stringify(taskList));
+  updateTask();
   textAreaListTask.value = '';
   formAddTask.classList.add('hidden');
 });
