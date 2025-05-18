@@ -34,10 +34,14 @@ function newTaskElement(task) {
   button.classList.add('app_button-edit');
 
   button.onclick = () => {
+    debugger;
     const newDescriptionTask = prompt('Qual é o novo nome da tarefa:');
-    paragraph.textContent = newDescriptionTask;
-    task.description = newDescriptionTask;
-    updateTask();
+    console.log('Nova descrição da tarefa: ', newDescriptionTask);
+    if (newDescriptionTask) {
+      paragraph.textContent = newDescriptionTask;
+      task.description = newDescriptionTask;
+      updateTask();
+    }
   };
 
   const imageButton = document.createElement('img');
